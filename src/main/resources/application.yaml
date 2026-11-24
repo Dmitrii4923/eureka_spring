@@ -1,0 +1,41 @@
+server:
+  port: 8761
+
+spring:
+  application:
+    name: eureka-server
+
+eureka:
+  instance:
+    hostname: ${EUREKA_HOSTNAME:localhost}
+    secure-port-enabled: true
+    non-secure-port-enabled: false
+    status-page-url: https://${EUREKA_HOSTNAME}/actuator/info
+    health-check-url: https://${EUREKA_HOSTNAME}/actuator/health
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+  info:
+    env:
+      enabled: true
+
+info:
+  app:
+    name: health-portal-eureka-server
+    description: Реестр сервисов портала «Здоровье»
+
+logging:
+  level:
+    root: INFO
+    com.hospital: INFO
